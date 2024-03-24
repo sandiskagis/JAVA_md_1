@@ -9,7 +9,8 @@ public class Parcel {
     private boolean isFragile;
     private ParcelSize size;
     private LocalDateTime orderCreated = LocalDateTime.now();
-    private LocalDateTime plannedDelivery = LocalDateTime.now();
+    //private LocalDateTime plannedDelivery = LocalDateTime.now();
+    private LocalDateTime plannedDelivery = orderCreated.plus(2, ChronoUnit.WEEKS);
     private float price;
     private Driver driver;
 
@@ -45,8 +46,8 @@ public class Parcel {
         return orderCreated;
     }
 
-    public void setOrderCreated(LocalDateTime orederCreated) {
-        this.orderCreated = orederCreated;
+    public void setOrderCreated(LocalDateTime orderCreated) {
+        this.orderCreated = orderCreated;
     }
 
     public LocalDateTime getPlannedDelivery()
@@ -119,8 +120,8 @@ public class Parcel {
         setDriver(new Driver());
         setPlannedDelivery(plannedDelivery);
     }
-    public Parcel(boolean isFragile, ParcelSize size, Driver driver, LocalDateTime deliveryTime){
-        setOrderCreated(LocalDateTime.now());
+    public Parcel(boolean isFragile, ParcelSize size, Driver driver, LocalDateTime plannedDelivery){
+        this.orderCreated = LocalDateTime.now();
         setFragile(isFragile);
         setSize(size);
         setPrice(size, isFragile);

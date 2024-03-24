@@ -13,14 +13,18 @@ public class MainService {
         System.out.println(pe2);
 
         Driver dr1 = new Driver();
-        Driver dr2 = new Driver("Pēteris", "Kalniņš", "123456-21212", "11223344", 4.5F);
+        Driver dr2 = new Driver("Otrais", "Šoferis", "222222-22222", "22222222", 2.5F);
+        Driver dr3 = new Driver("Trešais", "Šoferis", "333333-33333", "33333333", 3.5F);
         System.out.println(dr1);
         System.out.println(dr2);
+        System.out.println(dr3);
 
         Parcel pa1 = new Parcel();
-        Parcel pa2 = new Parcel(false, ParcelSize.L, dr2, LocalDateTime.of(2024, 10, 15, 0, 0)); //Nesaglabājas plannedDelivery, stock aiziet nedēļu pēc šīs dienas datuma
+        Parcel pa2 = new Parcel(false, ParcelSize.L, dr2, LocalDateTime.of(2024, 10, 15, 0, 0));
+        Parcel pa3 = new Parcel(false, ParcelSize.M, dr2, LocalDateTime.of(2024, 2, 15, 0, 0));
         System.out.println(pa1);
         System.out.println(pa2);
+        System.out.println(pa3);
 
 
 

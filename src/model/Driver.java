@@ -50,8 +50,8 @@ public class Driver extends Person{
     public Driver()
     {
         setdID();
-        setName("Jānis");
-        setSurname("Ozols");
+        setName("Stock");
+        setSurname("Šoferis");
         setPersonCode("121290-12311");
         setLicenceNo("12345678");
         setExperienceInYears(3);
