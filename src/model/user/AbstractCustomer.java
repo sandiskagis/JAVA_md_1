@@ -58,22 +58,27 @@ public abstract class AbstractCustomer {
     public String getCustomerCode() {
         return customerCode;
     }
-    public abstract void setCustomerCode(String customerCode);
+    public abstract void setCustomerCode();
 
     //3.constructors
 
     public AbstractCustomer(){
+        setcID();
         this.address = new Address("Ventspils", "Inženieru iela", 50);
         setPhoneNo("21212121");
     }
     public AbstractCustomer(Address address, String phoneNo){
+        setcID();
         this.address = address;
         setPhoneNo(phoneNo);
     }
 
     //4. toString
 
-
+    public String toString()
+    {
+        return cID + " " + address + " " + parcels + "(" + phoneNo + ")";
+    }
 
     //5. other
 
@@ -96,4 +101,7 @@ public abstract class AbstractCustomer {
     }
 
 
+    public abstract void setCustomerCode(String cID, String title, String companyRegNo);
+
+    public abstract void setCustomerCode(long cID, String title, String companyRegNo);
 }
