@@ -1,6 +1,5 @@
 package model;
 import java.time.LocalDateTime;
-import java.time.Month;
 
 public class Parcel {
 
@@ -44,17 +43,17 @@ public class Parcel {
     {
         return orderCreated;
     }
-    public void setOrderCreated(LocalDateTime orderCreated)
-    {
-        this.orderCreated = orderCreated;
+
+    public void setOrderCreated(LocalDateTime orederCreated) {
+        this.orderCreated = orederCreated;
     }
 
     public LocalDateTime getPlannedDelivery()
     {
         return plannedDelivery;
     }
-    public void setPlannedDelivery(LocalDateTime plannedDelivery) throws Exception {
-        if (plannedDelivery.isAfter(this.orderCreated))
+    public void setPlannedDelivery(LocalDateTime plannedDelivery, LocalDateTime orderCreated) throws Exception {
+        if (plannedDelivery.isAfter(orderCreated))
             this.plannedDelivery = plannedDelivery;
         else
             throw new Exception("Planned delivery date and time must be after order date and time.");
@@ -117,7 +116,7 @@ public class Parcel {
         setSize(ParcelSize.L);
         setPrice(ParcelSize.L, true);
         setDriver(new Driver());
-        setPlannedDelivery(LocalDateTime.of(2025, Month.MAY, 1, 17, 0));
+        setPlannedDelivery(plannedDelivery, orderCreated);
     }
     public Parcel(LocalDateTime orderTime, boolean isFragile, ParcelSize size, Driver driver, LocalDateTime deliveryTime) throws Exception {
         setOrderCreated(orderTime);
@@ -125,7 +124,7 @@ public class Parcel {
         setSize(size);
         setPrice(size, isFragile);
         setDriver(driver);
-        setPlannedDelivery(deliveryTime);
+        setPlannedDelivery(plannedDelivery, orderCreated);
     }
     //4. toString
 
