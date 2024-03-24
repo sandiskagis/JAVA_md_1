@@ -1,5 +1,6 @@
 package model;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Parcel {
 
@@ -52,11 +53,11 @@ public class Parcel {
     {
         return plannedDelivery;
     }
-    public void setPlannedDelivery(LocalDateTime plannedDelivery, LocalDateTime orderCreated) throws Exception {
+    public void setPlannedDelivery(LocalDateTime plannedDelivery){
         if (plannedDelivery.isAfter(orderCreated))
             this.plannedDelivery = plannedDelivery;
         else
-            throw new Exception("Planned delivery date and time must be after order date and time.");
+            this.plannedDelivery = orderCreated.plus(1, ChronoUnit.WEEKS);
     }
 
     public float getPrice()
@@ -110,21 +111,21 @@ public class Parcel {
 
     //3. constructors
 
-    public Parcel() throws Exception {
+    public Parcel(){
         setOrderCreated(LocalDateTime.now());
         setFragile(true);
         setSize(ParcelSize.L);
         setPrice(ParcelSize.L, true);
         setDriver(new Driver());
-        setPlannedDelivery(plannedDelivery, orderCreated);
+        setPlannedDelivery(plannedDelivery);
     }
-    public Parcel(LocalDateTime orderTime, boolean isFragile, ParcelSize size, Driver driver, LocalDateTime deliveryTime) throws Exception {
-        setOrderCreated(orderTime);
+    public Parcel(boolean isFragile, ParcelSize size, Driver driver, LocalDateTime deliveryTime){
+        setOrderCreated(LocalDateTime.now());
         setFragile(isFragile);
         setSize(size);
         setPrice(size, isFragile);
         setDriver(driver);
-        setPlannedDelivery(plannedDelivery, orderCreated);
+        setPlannedDelivery(plannedDelivery);
     }
     //4. toString
 
