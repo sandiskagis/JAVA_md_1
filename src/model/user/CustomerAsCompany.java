@@ -1,6 +1,6 @@
 package model.user;
 
-public abstract class CustomerAsCompany extends AbstractCustomer {
+public class CustomerAsCompany extends AbstractCustomer {
 
     //1. variables
     private String title;
@@ -31,6 +31,7 @@ public abstract class CustomerAsCompany extends AbstractCustomer {
 
     //3. constructors
 
+
     public CustomerAsCompany(){
         super();
         setTitle("Uzņēmums");
@@ -50,12 +51,14 @@ public abstract class CustomerAsCompany extends AbstractCustomer {
         return super.toString() + ": " + customerCode;
     }
 
+
     //5. others
 
     @Override
     public void setCustomerCode(long cID, String title, String companyRegNo) {
         this.customerCode =  "<" + String.valueOf(cID) + ">_" + title + "_<" + companyRegNo;
     }
+
 
 
 }

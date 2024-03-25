@@ -58,7 +58,7 @@ public abstract class AbstractCustomer {
     public String getCustomerCode() {
         return customerCode;
     }
-    public abstract void setCustomerCode();
+
 
     //3.constructors
 
@@ -101,7 +101,6 @@ public abstract class AbstractCustomer {
     }
 
 
-    public abstract void setCustomerCode(String cID, String title, String companyRegNo);
 
     public abstract void setCustomerCode(long cID, String title, String companyRegNo);
 }
