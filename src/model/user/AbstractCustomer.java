@@ -15,7 +15,7 @@ public abstract class AbstractCustomer {
     private Address address;
     private String phoneNo;
     private ArrayList<Parcel> parcels = new ArrayList<Parcel>();
-    private String customerCode;
+    protected String customerCode;
     private static long counter = 0;
 
     //2. get and set
