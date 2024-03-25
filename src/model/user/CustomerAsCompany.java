@@ -51,7 +51,6 @@ public class CustomerAsCompany extends AbstractCustomer {
         return super.toString() + ": " + customerCode;
     }
 
-
     //5. others
 
     @Override
