@@ -31,6 +31,11 @@ public abstract class AbstractCustomerAsPerson extends AbstractCustomer {
     //}
 
 
+
+    public AbstractCustomerAsPerson(){
+        super();
+        this.person = new Person("Jānis", "Kalniņš", "101099-31141");
+    }
     public AbstractCustomerAsPerson(String name, String surname, String personCode, Address address, String phone){
         super(address, phone);
         this.person = new Person(name, surname, personCode);

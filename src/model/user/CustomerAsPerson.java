@@ -16,21 +16,23 @@ public class CustomerAsPerson extends AbstractCustomerAsPerson {
 
 
     //3. constructor
-
+    public CustomerAsPerson(){
+        super();
+        //
+        this.name = "Jānis";
+        this.surname = "Kalniņš";
+        this.personCode = "101099-31141";
+        setCustomerCode(getcID(), name, personCode);
+        //
+    }
     public CustomerAsPerson(String name, String surname, String personCode, Address address, String phone){
         super(name, surname, personCode, address, phone);
-
-
         //
         this.name = name;
         this.surname = surname;
         this.personCode = personCode;
         setCustomerCode(getcID(), name, personCode);
         //
-
-
-
-
     }
 
     //4. toString

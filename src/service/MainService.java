@@ -41,7 +41,7 @@ public class MainService {
 
 
 
-        System.out.println("-----Driver CRUD-----");
+        System.out.println("\n-----Driver CRUD-----");
 
         Driver dr1 = new Driver();
         Driver dr2 = new Driver("Otrais", "Šoferis", "170799-22222", "22222222", 2.5F);
@@ -109,20 +109,96 @@ public class MainService {
         Address address_c3 = new Address("Liepaja", "Vēja iela", 77);
         CustomerAsPerson c3 = new CustomerAsPerson("Jānis", "Liepiņš", "161299-21435", address_c3, "25252343");
 
+        Address address_c4 = new Address("Jelgava", "Liepu iela", 88);
+        CustomerAsPerson c4 = new CustomerAsPerson("Toms", "Krūmiņš", "210988-65543", address_c4, "21169308");
+
+        Address address_c5 = new Address("Ogre", "Priežu iela", 99);
+        Address address_c6 = new Address("Daugavpils", "Meža iela", 13);
+
+
+
+
         allCustomers.add(c1);
         allCustomers.add(c2);
         allCustomers.add(c3);
+        allCustomers.add(c4);
         //System.out.println(allCustomers);
         System.out.println(c1);
         System.out.println(c2);
-
         System.out.println(c3);
+        System.out.println(c4);
+
+
+
+
+        System.out.println("\nAll company customers:\n");
+
+
+        try{
+            retrieveAllCustomersAsCompany(allCustomers);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\nAll person customers:\n");
+
+        try{
+            retrieveAllCustomersAsPerson(allCustomers);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            CustomerAsPerson c5 = createNewCustomerAsPerson("Kārlis", "Bērziņš", "110199-71320", address_c5, "25508433");
+            allCustomers.add(c5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            CustomerAsCompany c6 = createNewCustomerAsCompany(address_c6, "25100965", "SIA Ogles", "90134809");
+            allCustomers.add(c6);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\nAll company customers:\n");
+
+
+        try{
+            retrieveAllCustomersAsCompany(allCustomers);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("\nAll person customers:\n");
+
+        try{
+            retrieveAllCustomersAsPerson(allCustomers);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 
 
 
         System.out.println("-----Customer CRUD-----\n");
+
+
+
+        System.out.println("-----Parcel CRUD-----");
+
+
+
+        System.out.println("-----Parcel CRUD-----\n");
+
+
+
 
 
 
@@ -143,7 +219,7 @@ public class MainService {
         //TODO
         //1. pārbaudīt personCode ir null
         if(personCode == null) {
-            throw new Exception("Problems with input arguments");
+            throw new Exception("Problems with input parameters");
         }
 
         //2. ejot cauri foreach cikla visiem drivers, atrast konkrēto pēc personas koda
@@ -162,7 +238,7 @@ public class MainService {
 
     public static void updateDriverLicenceNoByPersonCode(String personCode, String newLicenceNo) throws Exception {
         if(personCode == null || newLicenceNo == null) {
-            throw new Exception("Problems with input arguments");
+            throw new Exception("Problems with input parameters");
         }
         for(Driver tempSt: allDrivers) {
             if(tempSt instanceof Driver){
@@ -182,7 +258,7 @@ public class MainService {
     }
     public static void updateDriverExperienceByPersonCode(String personCode, float newExperience) throws Exception {
         if(personCode == null || newExperience <= 0 || newExperience >= 100) {
-            throw new Exception("Problems with input arguments");
+            throw new Exception("Problems with input parameters");
         }
         for(Driver tempSt: allDrivers) {
             if(tempSt instanceof Driver){
@@ -203,7 +279,7 @@ public class MainService {
     public static void deleteDriverByPersonCode(String personCode) throws Exception{
         //1. pārbaudam ievades argumentu
         if(personCode == null) {
-            throw new Exception("Problems with input arguments");
+            throw new Exception("Problems with input parameters");
         }
         //2. atrodam šoferi, ko gribam dzest
         for(Driver tempSt: allDrivers) {
@@ -219,6 +295,69 @@ public class MainService {
         throw new Exception("Student with personcode " + personCode
                 + " is not registered in the system");
     }
+
+
+    public static ArrayList<CustomerAsCompany> retrieveAllCustomersAsCompany(ArrayList<AbstractCustomer> customers) throws Exception {
+        if(customers == null) {
+            throw new Exception("Problems with input parameters");
+        }
+
+        ArrayList<CustomerAsCompany> companyCustomers = new ArrayList<>();
+
+        for (AbstractCustomer customer : customers) {
+            if (customer instanceof CustomerAsCompany) {
+                System.out.println(customer);
+                companyCustomers.add((CustomerAsCompany) customer);
+            }
+        }
+
+        if (companyCustomers.isEmpty()) {
+            throw new Exception("No company customers found");
+        }
+
+        return companyCustomers;
+    }
+
+    public static ArrayList<CustomerAsPerson> retrieveAllCustomersAsPerson(ArrayList<AbstractCustomer> customers) throws Exception {
+        if(customers == null) {
+            throw new Exception("Problems with input parameters");
+        }
+
+        ArrayList<CustomerAsPerson> personCustomers = new ArrayList<>();
+
+        for (AbstractCustomer customer : customers) {
+            if (customer instanceof CustomerAsPerson) {
+                System.out.println(customer);
+                personCustomers.add((CustomerAsPerson) customer);
+            }
+        }
+
+        if (personCustomers.isEmpty()) {
+            throw new Exception("No company customers found");
+        }
+
+        return personCustomers;
+    }
+
+    public static CustomerAsPerson createNewCustomerAsPerson(String name, String surname, String personCode, Address address, String phone) throws Exception {
+        if (name == null || surname == null || personCode == null || address == null || phone == null) {
+            throw new Exception("Problems with input parameters");
+        }
+
+        return new CustomerAsPerson(name, surname, personCode, address, phone);
+    }
+
+    public static CustomerAsCompany createNewCustomerAsCompany(Address address, String phoneNo, String title, String companyRegNo) throws Exception {
+        if (address == null || phoneNo == null || title == null || companyRegNo == null) {
+            throw new Exception("Problems with input parameters");
+        }
+
+        return new CustomerAsCompany(address, phoneNo, title, companyRegNo);
+    }
+
+
+
+
 
 
 
