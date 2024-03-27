@@ -2,6 +2,9 @@ package service;
 
 import model.*;
 import model.user.AbstractCustomer;
+import model.user.AbstractCustomerAsPerson;
+import model.user.CustomerAsCompany;
+import model.user.CustomerAsPerson;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -88,9 +91,41 @@ public class MainService {
         }
 
 
-        System.out.println("-----Driver CRUD-----");
+        System.out.println("-----Driver CRUD-----\n");
 
-        
+
+
+
+
+
+
+        System.out.println("-----Customer CRUD-----");
+
+        CustomerAsCompany c1 = new CustomerAsCompany();
+
+        Address address_c2 = new Address("Riga", "Brīvības iela", 5);
+        CustomerAsCompany c2 = new CustomerAsCompany(address_c2, "23336666", "Nosaukums", "81112222");
+
+        Address address_c3 = new Address("Liepaja", "Vēja iela", 77);
+        CustomerAsPerson c3 = new CustomerAsPerson("Jānis", "Liepiņš", "161299-21435", address_c3, "25252343");
+
+        allCustomers.add(c1);
+        allCustomers.add(c2);
+        allCustomers.add(c3);
+        //System.out.println(allCustomers);
+        System.out.println(c1);
+        System.out.println(c2);
+
+        System.out.println(c3);
+
+
+
+
+
+        System.out.println("-----Customer CRUD-----\n");
+
+
+
 
     }
 

@@ -69,7 +69,8 @@ public abstract class AbstractCustomer {
     }
     public AbstractCustomer(Address address, String phoneNo){
         setcID();
-        this.address = address;
+        //this.address = address;
+        setAddress(address);
         setPhoneNo(phoneNo);
     }
 

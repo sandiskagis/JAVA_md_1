@@ -7,14 +7,30 @@ public abstract class AbstractCustomerAsPerson extends AbstractCustomer {
 
     //1. variables
 
-    private Person person;
+    protected Person person;
+    //private String name;
+    //private String surname;
+    //private String personcode;
+
 
     //2. get and set
 
     //3. constructors
-    public AbstractCustomerAsPerson() {
-        super();
-    }
+    //public AbstractCustomerAsPerson(Address address, String phone, String name, String surname, String personCode) {
+   // public AbstractCustomerAsPerson() {
+    //    super();
+    //}
+    //public AbstractCustomerAsPerson(Person person, String name, String surname, String personCode, Address address, String phone){
+    //public AbstractCustomerAsPerson(Person person, Address address, String phone){
+        //super(address, phone);
+        //.person = person;
+        //this.person = new Person(name, surname, personCode);
+        //person.setName(name);
+        //person.setSurname(surname);
+       // person.setPersonCode(personCode);
+    //}
+
+
     public AbstractCustomerAsPerson(String name, String surname, String personCode, Address address, String phone){
         super(address, phone);
         this.person = new Person(name, surname, personCode);

@@ -1,5 +1,7 @@
 package model.user;
 
+import model.Address;
+
 public class CustomerAsCompany extends AbstractCustomer {
 
     //1. variables
@@ -38,8 +40,8 @@ public class CustomerAsCompany extends AbstractCustomer {
         setCompanyRegNo("11223344");
         setCustomerCode(getcID(), "Uzņēmums", "11223344");
     }
-    public CustomerAsCompany(String title, String companyRegNo){
-        super();
+    public CustomerAsCompany(Address address, String phoneNo, String title, String companyRegNo){
+        super(address, phoneNo);
         setTitle(title);
         setCompanyRegNo(companyRegNo);
         setCustomerCode(getcID(), title, companyRegNo);
@@ -55,7 +57,7 @@ public class CustomerAsCompany extends AbstractCustomer {
 
     @Override
     public void setCustomerCode(long cID, String title, String companyRegNo) {
-        this.customerCode =  "<" + String.valueOf(cID) + ">_" + title + "_<" + companyRegNo;
+        this.customerCode = String.valueOf(cID) + "_" + title + "_" + companyRegNo;
     }
 
 
