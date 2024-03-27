@@ -185,6 +185,15 @@ public class MainService {
 
 
 
+//        Parcel parcel = new Parcel(); // Create a new parcel
+//        try{
+//            String customerCode = "3_Toms_210988-65543";
+//            Parcel parcel1 = new Parcel();
+//            addNewParcelToCustomer(customerCode, parcel1, allCustomers);
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
 
         System.out.println("-----Customer CRUD-----\n");
@@ -354,6 +363,34 @@ public class MainService {
 
         return new CustomerAsCompany(address, phoneNo, title, companyRegNo);
     }
+
+
+
+
+//    public static void addNewParcelToCustomer(String customerCode, Parcel parcel, ArrayList<AbstractCustomer> customers) {
+//        // Pārbauda, vai ir norādīts pareizs customerCode un vai paciņa ir derīga
+//        if (customerCode == null || parcel == null) {
+//            System.out.println("Nevar pievienot paciņu. Nepareizi norādīts customerCode vai paciņas dati.");
+//            return;
+//        }
+//
+//        AbstractCustomer customer = findCustomerByCode(customerCode, customers);
+//        if (customer == null) {
+//            System.out.println("Pircējs ar norādīto customerCode nav atrasts.");
+//            return;
+//        }
+//
+//        customer.addNewParcel(parcel);
+//    }
+//
+//    private static AbstractCustomer findCustomerByCode(String customerCode, ArrayList<AbstractCustomer> customers) {
+//        for (AbstractCustomer customer : customers) {
+//            if (customer.getCustomerCode().equals(customerCode)) {
+//                return customer;
+//            }
+//        }
+//        return null;
+//    }
 
 
 

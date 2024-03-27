@@ -83,23 +83,43 @@ public abstract class AbstractCustomer {
 
     //5. other
 
-    public void addNewParcel(Parcel parcel, boolean isFragile, ParcelSize size, Driver driver, LocalDateTime plannedDelivery){
-        // Check if a parcel with the same characteristics already exists
+//    public void addNewParcel(Parcel parcel, boolean isFragile, ParcelSize size, Driver driver, LocalDateTime plannedDelivery){
+//        // Check if a parcel with the same characteristics already exists
+//        for (Parcel existingParcel : parcels) {
+//            if (existingParcel.isFragile() == isFragile &&
+//                    existingParcel.getSize() == size &&
+//                    existingParcel.getDriver().equals(driver) &&
+//                    existingParcel.getPlannedDelivery().equals(plannedDelivery)) {
+//                // Parcel with the same characteristics already exists, so don't add a new one
+//                System.out.println("Parcel with the same characteristics already exists.");
+//                return;
+//            }
+//        }
+//
+//        // If no existing parcel found, create and add the new parcel
+//        Parcel newParcel = new Parcel(isFragile, size, driver, plannedDelivery);
+//        parcels.add(newParcel);
+//    }
+
+    public void addNewParcel(Parcel parcel) {
+        if (parcel == null) {
+            System.out.println("Cannot add null parcel");
+            return;
+        }
+
+        // Check if the parcel already exists
         for (Parcel existingParcel : parcels) {
-            if (existingParcel.isFragile() == isFragile &&
-                    existingParcel.getSize() == size &&
-                    existingParcel.getDriver().equals(driver) &&
-                    existingParcel.getPlannedDelivery().equals(plannedDelivery)) {
-                // Parcel with the same characteristics already exists, so don't add a new one
-                System.out.println("Parcel with the same characteristics already exists.");
+            if (existingParcel.equals(parcel)) {
+                System.out.println("Parcel already exists for this customer");
                 return;
             }
         }
 
-        // If no existing parcel found, create and add the new parcel
-        Parcel newParcel = new Parcel(isFragile, size, driver, plannedDelivery);
-        parcels.add(newParcel);
+        // Add the new parcel to the list of parcels
+        parcels.add(parcel);
+        System.out.println("New parcel added successfully");
     }
+
 
 
 
