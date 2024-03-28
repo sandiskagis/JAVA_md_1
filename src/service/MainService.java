@@ -10,6 +10,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import model.Parcel;
+import model.Driver;
+
+import java.time.temporal.ChronoUnit;
+
+
 public class MainService {
 
     public static ArrayList<Driver> allDrivers = new ArrayList<Driver>();
@@ -24,28 +30,13 @@ public class MainService {
         System.out.println(pe1);
         System.out.println(pe2);
 
-        //Driver dr1 = new Driver();
-        //Driver dr2 = new Driver("Otrais", "Šoferis", "222222-22222", "22222222", 2.5F);
-        //Driver dr3 = new Driver("Trešais", "Šoferis", "333333-33333", "33333333", 3.5F);
-        //System.out.println(dr1);
-        //System.out.println(dr2);
-        //System.out.println(dr3);
-
-        //Parcel pa1 = new Parcel();
-        //Parcel pa2 = new Parcel(false, ParcelSize.L, dr2, LocalDateTime.of(2024, 10, 15, 0, 0));
-        //Parcel pa3 = new Parcel(false, ParcelSize.M, dr2, LocalDateTime.of(2024, 2, 15, 0, 0));
-        //System.out.println(pa1);
-        //System.out.println(pa2);
-        //System.out.println(pa3);
-        //System.out.println("-");
-
-
-
         System.out.println("\n-----Driver CRUD-----");
 
         Driver dr1 = new Driver();
         Driver dr2 = new Driver("Otrais", "Šoferis", "170799-22222", "22222222", 2.5F);
-        allDrivers.addAll(Arrays.asList(dr1, dr2));
+        Driver dr3 = new Driver("Trešais", "Braucējs", "101000-33333", "11111111", 5.5F);
+        Driver dr4 = new Driver("Ceturtais", "Stūrmanis", "221080-44444", "24444444", 5.0F);
+        allDrivers.addAll(Arrays.asList(dr1, dr2, dr3, dr4));
 
 
         try
@@ -53,43 +44,23 @@ public class MainService {
             Driver temptSt = retrieveDriverByPersonCode("170799-22222");
             System.out.println("Atrastais šoferis " + temptSt);
 
-            Driver temptSt2 = retrieveDriverByPersonCode("101010-22222");
+            Driver temptSt2 = retrieveDriverByPersonCode("101000-33333");
             System.out.println("Atrastais šoferis " + temptSt2);
+
+            updateDriverLicenceNoByPersonCode("170799-22222", "33333333");//Pastars uz Kalniņš
+            System.out.println(dr2);
+
+            updateDriverExperienceByPersonCode("170799-22222", 5.5f);//Pastars uz Kalniņš
+            System.out.println(dr2);
+
+            deleteDriverByPersonCode("170799-22222");
+            System.out.println("All drivers: ");
+            System.out.println(allDrivers);
         }
         catch (Exception e)
         {
             System.out.println(e);
         }
-
-
-        try
-        {
-            updateDriverLicenceNoByPersonCode("170799-22222", "33333333");//Pastars uz Kalniņš
-            System.out.println(dr2);
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-
-
-        try
-        {
-            updateDriverExperienceByPersonCode("170799-22222", 5.5f);//Pastars uz Kalniņš
-            System.out.println(dr2);
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-
-
-        try {
-            deleteDriverByPersonCode("170799-22222");
-            System.out.println("All drivers: ");
-            System.out.println(allDrivers);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
         System.out.println("-----Driver CRUD-----\n");
 
@@ -103,98 +74,55 @@ public class MainService {
 
         CustomerAsCompany c1 = new CustomerAsCompany();
 
-        Address address_c2 = new Address("Riga", "Brīvības iela", 5);
+        Address address_c2 = new Address(City.Riga, "Brīvības iela", 5);
         CustomerAsCompany c2 = new CustomerAsCompany(address_c2, "23336666", "Nosaukums", "81112222");
 
-        Address address_c3 = new Address("Liepaja", "Vēja iela", 77);
+        Address address_c3 = new Address(City.Liepaja, "Vēja iela", 77);
         CustomerAsPerson c3 = new CustomerAsPerson("Jānis", "Liepiņš", "161299-21435", address_c3, "25252343");
 
-        Address address_c4 = new Address("Jelgava", "Liepu iela", 88);
+        Address address_c4 = new Address(City.Jelgava, "Liepu iela", 88);
         CustomerAsPerson c4 = new CustomerAsPerson("Toms", "Krūmiņš", "210988-65543", address_c4, "21169308");
 
-        Address address_c5 = new Address("Ogre", "Priežu iela", 99);
-        Address address_c6 = new Address("Daugavpils", "Meža iela", 13);
+        Address address_c5 = new Address(City.Ventspils, "Priežu iela", 99);
+        CustomerAsPerson c5 = new CustomerAsPerson("Andris", "Pakalns", "300679-34712", address_c5, "25997100");
 
 
+        allCustomers.addAll(Arrays.asList(c1, c2, c3, c4, c5));
 
 
-        allCustomers.add(c1);
-        allCustomers.add(c2);
-        allCustomers.add(c3);
-        allCustomers.add(c4);
-        //System.out.println(allCustomers);
-        System.out.println(c1);
-        System.out.println(c2);
-        System.out.println(c3);
-        System.out.println(c4);
+        try {
 
-
-
-
-        System.out.println("\nAll company customers:\n");
-
-
-        try{
+            System.out.println("\nAll company customers:\n");
             retrieveAllCustomersAsCompany(allCustomers);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("\nAll person customers:\n");
-
-        try{
+            System.out.println("\nAll person customers:\n");
             retrieveAllCustomersAsPerson(allCustomers);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            CustomerAsPerson c5 = createNewCustomerAsPerson("Kārlis", "Bērziņš", "110199-71320", address_c5, "25508433");
-            allCustomers.add(c5);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            CustomerAsCompany c6 = createNewCustomerAsCompany(address_c6, "25100965", "SIA Ogles", "90134809");
+            Address address_c6 = new Address(City.Liepaja, "Smilšu iela", 205);
+            CustomerAsPerson c6 = createNewCustomerAsPerson("Kārlis", "Bērziņš", "110199-71320", address_c6, "25508433");
             allCustomers.add(c6);
+            Address address_c7 = new Address(City.Riga, "Ganību dambis", 7);
+            CustomerAsCompany c7 = createNewCustomerAsCompany(address_c7, "25100965", "SIA Ogles", "90134809");
+            allCustomers.add(c7);
+            System.out.println("\nAll company customers:\n");
+            retrieveAllCustomersAsCompany(allCustomers);
+            System.out.println("\nAll person customers:\n");
+            retrieveAllCustomersAsPerson(allCustomers);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println("\nAll company customers:\n");
-
 
         try{
-            retrieveAllCustomersAsCompany(allCustomers);
+            createNewParcelForCustomer(LocalDateTime.now().plus(2, ChronoUnit.WEEKS), ParcelSize.X, true, retrieveDriverByPersonCode("101000-33333"), "3_person_210988-65543");
+            createNewParcelForCustomer(LocalDateTime.now().plus(5, ChronoUnit.DAYS), ParcelSize.S, false, retrieveDriverByPersonCode("101000-33333"), "3_person_210988-65543");
+            createNewParcelForCustomer(LocalDateTime.now().plus(3, ChronoUnit.DAYS), ParcelSize.M, true, retrieveDriverByPersonCode("101000-33333"), "3_person_210988-65543");
+
+            createNewParcelForCustomer(LocalDateTime.now().plus(3, ChronoUnit.WEEKS), ParcelSize.M, true, retrieveDriverByPersonCode("221080-44444"), "4_person_300679-34712");
+            createNewParcelForCustomer(LocalDateTime.now().plus(6, ChronoUnit.DAYS), ParcelSize.L, false, retrieveDriverByPersonCode("221080-44444"), "4_person_300679-34712");
+            createNewParcelForCustomer(LocalDateTime.now().plus(4, ChronoUnit.DAYS), ParcelSize.XL, true, retrieveDriverByPersonCode("221080-44444"), "4_person_300679-34712");
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println("\nAll person customers:\n");
-
-        try{
-            retrieveAllCustomersAsPerson(allCustomers);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-//        Parcel parcel = new Parcel(); // Create a new parcel
-//        try{
-//            String customerCode = "3_Toms_210988-65543";
-//            Parcel parcel1 = new Parcel();
-//            addNewParcelToCustomer(customerCode, parcel1, allCustomers);
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
 
         System.out.println("-----Customer CRUD-----\n");
 
@@ -202,25 +130,46 @@ public class MainService {
 
         System.out.println("-----Parcel CRUD-----");
 
+        try {
+            System.out.println("\nRetreive all parcels by customer code\n");
+            System.out.println(retrieveAllParcelsByCustomerCode("3_person_210988-65543"));
+            System.out.println(retrieveAllParcelsByCustomerCode("4_person_300679-34712"));
 
+            System.out.println("\nRetreive all parcels by driver person code\n");
+            System.out.println(retrieveAllParcelsByDriverPersonCode("101000-33333"));
+            System.out.println(retrieveAllParcelsByDriverPersonCode("221080-44444"));
+
+            System.out.println("\nRetreive all parcels by city\n");
+            System.out.println("\nVentspils:");
+            System.out.println(retrieveAllParcelsByCity(City.Ventspils));
+            System.out.println("\nRiga:");
+            System.out.println(retrieveAllParcelsByCity(City.Riga));
+            System.out.println("\nLiepaja:");
+            System.out.println(retrieveAllParcelsByCity(City.Liepaja));
+            System.out.println("\nJelgava:");
+            System.out.println(retrieveAllParcelsByCity(City.Jelgava));
+            System.out.println("\nDaugavpils:");
+            System.out.println(retrieveAllParcelsByCity(City.Daugavpils));
+
+            System.out.println("\nRetreive all parcels by size\n");
+            System.out.println("\nX:");
+            System.out.println(retriveAllParcelsBySize(ParcelSize.X));
+            System.out.println("\nS:");
+            System.out.println(retriveAllParcelsBySize(ParcelSize.S));
+            System.out.println("\nM:");
+            System.out.println(retriveAllParcelsBySize(ParcelSize.M));
+            System.out.println("\nL:");
+            System.out.println(retriveAllParcelsBySize(ParcelSize.L));
+            System.out.println("\nXL:");
+            System.out.println(retriveAllParcelsBySize(ParcelSize.XL));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println("-----Parcel CRUD-----\n");
 
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
 
 
     //RETRIEVE
@@ -236,7 +185,7 @@ public class MainService {
             if(tempSt instanceof Driver){
                 if(tempSt.getPersonCode().equals(personCode)) {
                     //3. atgriezt pašu atrasto driver
-                    return (Driver) tempSt;
+                    return tempSt;
                 }
             }
         }
@@ -364,39 +313,62 @@ public class MainService {
         return new CustomerAsCompany(address, phoneNo, title, companyRegNo);
     }
 
+    public static void createNewParcelForCustomer(LocalDateTime plannedDelivery, ParcelSize size, boolean isFargile, Driver driver, String customerCode) throws Exception {
+        for (AbstractCustomer tempSt : allCustomers){
+            if ((tempSt.getCustomerCode().matches(customerCode))) {
+                tempSt.addNewParcel(new Parcel(isFargile, size, driver, plannedDelivery));
+                return;
+            }
+        }
+        throw new Exception("Invalid customer code");
+    }
 
+    public static ArrayList<Parcel> retrieveAllParcelsByCustomerCode(String customerCode) throws Exception {
+        for (AbstractCustomer tempSt : allCustomers){
+            if ((tempSt.getCustomerCode().matches(customerCode))) {
+                return tempSt.getParcels();
+            }
+        }
+        throw new Exception("Invalid customer code");
+    }
 
+    public static ArrayList<Parcel> retrieveAllParcelsByDriverPersonCode(String personCode) throws Exception{
+        if(personCode == null || !(personCode.matches("[0-9]{6}-[0-9]{5}"))) {
+            throw new Exception("Invalid person code");
+        }
+        ArrayList<Parcel> parcels = new ArrayList<Parcel>();
+        for (AbstractCustomer tempSt : allCustomers){
+            for (Parcel tempVar : tempSt.getParcels()) {
+                if (tempVar.getDriver().getPersonCode().matches(personCode)) {
+                    parcels.add(tempVar);
+                }
+            }
+        }
+        return parcels;
+    }
 
-//    public static void addNewParcelToCustomer(String customerCode, Parcel parcel, ArrayList<AbstractCustomer> customers) {
-//        // Pārbauda, vai ir norādīts pareizs customerCode un vai paciņa ir derīga
-//        if (customerCode == null || parcel == null) {
-//            System.out.println("Nevar pievienot paciņu. Nepareizi norādīts customerCode vai paciņas dati.");
-//            return;
-//        }
-//
-//        AbstractCustomer customer = findCustomerByCode(customerCode, customers);
-//        if (customer == null) {
-//            System.out.println("Pircējs ar norādīto customerCode nav atrasts.");
-//            return;
-//        }
-//
-//        customer.addNewParcel(parcel);
-//    }
-//
-//    private static AbstractCustomer findCustomerByCode(String customerCode, ArrayList<AbstractCustomer> customers) {
-//        for (AbstractCustomer customer : customers) {
-//            if (customer.getCustomerCode().equals(customerCode)) {
-//                return customer;
-//            }
-//        }
-//        return null;
-//    }
+    public static ArrayList<Parcel> retrieveAllParcelsByCity(City city) throws Exception{
+        ArrayList<Parcel> parcels = new ArrayList<Parcel>();
+        for (AbstractCustomer tempSt : allCustomers){
+            if (tempSt.getAddress().getCity() == city) {
+                for (Parcel tempVar : tempSt.getParcels()) {
+                    parcels.add(tempVar);
+                }
+            }
+        }
+        return parcels;
+    }
 
-
-
-
-
-
-
+    public static ArrayList<Parcel> retriveAllParcelsBySize(ParcelSize size) throws Exception {
+        ArrayList<Parcel> parcels = new ArrayList<Parcel>();
+        for (AbstractCustomer tempSt : allCustomers){
+            for (Parcel tempVar : tempSt.getParcels()) {
+                if (tempVar.getSize() == size) {
+                    parcels.add(tempVar);
+                }
+            }
+        }
+        return parcels;
+    }
 
 }

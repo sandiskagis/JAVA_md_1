@@ -19,31 +19,31 @@ public class CustomerAsPerson extends AbstractCustomerAsPerson {
     public CustomerAsPerson(){
         super();
         //
-        this.name = "Jānis";
-        this.surname = "Kalniņš";
-        this.personCode = "101099-31141";
-        setCustomerCode(getcID(), name, personCode);
+//        this.name = "Jānis";
+//        this.surname = "Kalniņš";
+//        this.personCode = "101099-31141";
+        setCustomerCode();
         //
     }
     public CustomerAsPerson(String name, String surname, String personCode, Address address, String phone){
         super(name, surname, personCode, address, phone);
         //
-        this.name = name;
-        this.surname = surname;
-        this.personCode = personCode;
-        setCustomerCode(getcID(), name, personCode);
+//        this.name = name;
+//        this.surname = surname;
+//        this.personCode = personCode;
+        setCustomerCode();
         //
     }
 
     //4. toString
     public String toString(){
         //return super.toString() + ": " + name + " " + surname + " " + personCode+ ": " + customerCode;
-        return super.toString() + ": " + customerCode;
+        return super.toString() + ": " + super.getCustomerCode();
     }
 
 
     @Override
-    public void setCustomerCode(long cID, String name, String personCode) {
-        this.customerCode = String.valueOf(cID) + "_" + name + "_" + personCode;
+    public void setCustomerCode() {
+        super.customerCode = super.getcID() + "_person_" + super.person.getPersonCode();
     }
 }

@@ -24,7 +24,6 @@ public class Person {
     {
         return surname;
     }
-
     public void setSurname(String surname)
     {
         if(surname != null && surname.matches("[A-ZĒŪĪĻĶĢŠĀŽČŅ]{1}[a-zēūīļķģšāžčņ]+"))
@@ -32,11 +31,11 @@ public class Person {
         else
             this.surname = "Undefined";
     }
+
     public String getPersonCode()
     {
         return personCode;
     }
-
     public void setPersonCode(String personCode)
     {
         if(personCode != null && personCode.matches("[0-9]{6}-[0-9]{5}"))

@@ -38,26 +38,26 @@ public class CustomerAsCompany extends AbstractCustomer {
         super();
         setTitle("Uzņēmums");
         setCompanyRegNo("11223344");
-        setCustomerCode(getcID(), "Uzņēmums", "11223344");
+        setCustomerCode();
     }
     public CustomerAsCompany(Address address, String phoneNo, String title, String companyRegNo){
         super(address, phoneNo);
         setTitle(title);
         setCompanyRegNo(companyRegNo);
-        setCustomerCode(getcID(), title, companyRegNo);
+        setCustomerCode();
     }
 
     //4. toString
 
     public String toString(){
-        return super.toString() + ": " + customerCode;
+        return super.toString() + ": " + super.getCustomerCode();
     }
 
     //5. others
 
     @Override
-    public void setCustomerCode(long cID, String title, String companyRegNo) {
-        this.customerCode = String.valueOf(cID) + "_" + title + "_" + companyRegNo;
+    public void setCustomerCode() {
+        super.customerCode = super.getcID() + "_company_" + this.companyRegNo;
     }
 
 

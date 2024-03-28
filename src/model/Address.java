@@ -4,22 +4,19 @@ public class Address {
 
     //1. variables
 
-    private String city;
+    private City city;
     private String streetOrHouseTitle;
     private int houseNo = 0;
 
     //2. get and set
 
-    public String getCity()
+    public City getCity()
     {
         return city;
     }
-    public void setCity(String city)
+    public void setCity(City city)
     {
-        if(city != null && city.matches("[A-Z]{1}[a-z]{3,9}"))
-            this.city = city;
-        else
-            this.city = "Undefined";
+        this.city = city;
     }
 
     public String getStreetOrHouseTitle()
@@ -50,12 +47,12 @@ public class Address {
 
     public Address()
     {
-        setCity("Riga");
+        setCity(City.Riga);
         setStreetOrHouseTitle("Brīvības iela");
         setHouseNo(100);
     }
 
-    public Address(String city, String streetOrHouseTitle, int houseNo)
+    public Address(City city, String streetOrHouseTitle, int houseNo)
     {
         setCity(city);
         setStreetOrHouseTitle(streetOrHouseTitle);

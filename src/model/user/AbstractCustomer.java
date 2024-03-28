@@ -64,7 +64,7 @@ public abstract class AbstractCustomer {
 
     public AbstractCustomer(){
         setcID();
-        this.address = new Address("Ventspils", "Inženieru iela", 50);
+        setAddress(new Address());
         setPhoneNo("21212121");
     }
     public AbstractCustomer(Address address, String phoneNo){
@@ -101,27 +101,22 @@ public abstract class AbstractCustomer {
 //        parcels.add(newParcel);
 //    }
 
-    public void addNewParcel(Parcel parcel) {
-        if (parcel == null) {
-            System.out.println("Cannot add null parcel");
+    public void addNewParcel(Parcel parcel) throws Exception {
+        if (parcel != null && parcel instanceof Parcel) {
+            for (Parcel e : parcels){
+                if (e.equals(parcel)){
+                    throw new Exception("Parcel already exists");
+                }
+            }
+            parcels.add(parcel);
             return;
         }
-
-        // Check if the parcel already exists
-        for (Parcel existingParcel : parcels) {
-            if (existingParcel.equals(parcel)) {
-                System.out.println("Parcel already exists for this customer");
-                return;
-            }
-        }
-
-        // Add the new parcel to the list of parcels
-        parcels.add(parcel);
-        System.out.println("New parcel added successfully");
+        throw new Exception("Invalid input parameters");
     }
 
 
 
 
-    public abstract void setCustomerCode(long cID, String title, String companyRegNo);
+    //public abstract void setCustomerCode(long cID, String title, String companyRegNo);
+    public abstract void setCustomerCode();
 }
